@@ -5,17 +5,18 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { Sparkles, Zap, Globe, Users, FileText, Search } from "lucide-react";
 
 const Index = () => {
-  const [currentVideo, setCurrentVideo] = useState<string | null>(null);
+  const [currentTranscriptionId, setCurrentTranscriptionId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleTranscribe = async (url: string) => {
+  const handleTranscribe = async (transcriptionId: string) => {
     setIsProcessing(true);
+    setCurrentTranscriptionId(transcriptionId);
     
-    // Simulate processing time
+    // The processing state will be managed by the TranscriptPlayer component
+    // which will poll for transcription status
     setTimeout(() => {
-      setCurrentVideo(url);
       setIsProcessing(false);
-    }, 3000);
+    }, 1000);
   };
 
   const features = [
@@ -51,11 +52,11 @@ const Index = () => {
     }
   ];
 
-  if (currentVideo) {
+  if (currentTranscriptionId) {
     return (
       <div className="min-h-screen p-6">
         <div className="container mx-auto">
-          <TranscriptPlayer videoUrl={currentVideo} />
+          <TranscriptPlayer transcriptionId={currentTranscriptionId} />
         </div>
       </div>
     );

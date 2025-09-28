@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      transcriptions: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          language: string | null
+          status: Database["public"]["Enums"]["transcription_status"]
+          transcript_text: string | null
+          updated_at: string
+          user_id: string | null
+          video_title: string | null
+          youtube_url: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          language?: string | null
+          status?: Database["public"]["Enums"]["transcription_status"]
+          transcript_text?: string | null
+          updated_at?: string
+          user_id?: string | null
+          video_title?: string | null
+          youtube_url: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          language?: string | null
+          status?: Database["public"]["Enums"]["transcription_status"]
+          transcript_text?: string | null
+          updated_at?: string
+          user_id?: string | null
+          video_title?: string | null
+          youtube_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +61,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      transcription_status: "processing" | "completed" | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +188,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      transcription_status: ["processing", "completed", "failed"],
+    },
   },
 } as const
